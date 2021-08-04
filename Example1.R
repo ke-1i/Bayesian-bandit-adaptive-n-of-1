@@ -17,7 +17,11 @@ nobv = 5 #number of observations per patient
 b0 = rnorm(J,tru.b.mu[1],tru.b.sig[1])
 b1 = rnorm(J,tru.b.mu[2],tru.b.sig[2])
 b = cbind(b0,b1)
-trup = c(tru.b.mu,tru.b.sig,tru.y.sig,b0,b1)
+trup = list(tru.b.mu = tru.b.mu,
+            tru.b.sig = tru.b.sig,
+            tru.y.sig = tru.y.sig,
+            b0 = b0,
+            b1 = b1)
 set.seed(NULL) #undo seed setting
 
 
@@ -41,8 +45,8 @@ for (i in 1:4){
   t = out[6] #treatment allocations 
   y = out[7] #observed outcomes
   save(out, file=paste("Example1_",designs[i],".RData",sep=""))
+  #cat(timestamp())
 }
-
 
 
 

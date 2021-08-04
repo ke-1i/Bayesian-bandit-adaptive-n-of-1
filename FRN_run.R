@@ -2,7 +2,8 @@ FRN_run <- function(J, nperiod, nobv, b, truep){
   
   library(rstan)
   options(mc.cores = parallel::detectCores())
-  rstan_options(auto_write = TRUE)
+  rstan_options(auto_write=TRUE, javascript=FALSE)
+  tru.y.sig = truep$tru.y.sig
 
   numt = 2
   N = nperiod*J*nobv #number of total datapoints
@@ -40,7 +41,7 @@ FRN_run <- function(J, nperiod, nobv, b, truep){
                   control = list(adapt_delta = 0.99,max_treedepth = 15))
   
   post_samples=extract(hout)
-  out <- list(post_samples,hout,period,id,t,y)
+  out <- list(NULL,post_samples,hout,period,id,t,y)
   return(out)
 }
 

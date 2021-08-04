@@ -2,7 +2,8 @@ B_BAN_run <- function(J, nperiod, nobv, b, truep){
   
   library(rstan)
   options(mc.cores = parallel::detectCores())
-  rstan_options(auto_write = TRUE)
+  rstan_options(auto_write=TRUE, javascript=FALSE)
+  tru.y.sig = truep$tru.y.sig
   
   hmc_samples <- function(current_data){
     houtput <- stan(file='model_agg.stan', #stan model specified in an external file
