@@ -17,7 +17,11 @@ b[19,2]=-1.5
 b[4,2]=-2
 b[25,2]=-1.7
 b[11,2]=-1.85
-trup = c(tru.b.mu,tru.b.sig,tru.y.sig,b0,b1)
+trup = list(tru.b.mu = tru.b.mu,
+            tru.b.sig = tru.b.sig,
+            tru.y.sig = tru.y.sig,
+            b0 = b0,
+            b1 = b1)
 set.seed(NULL) #undo seed setting
 
 J = 30 #number of patients
@@ -25,7 +29,9 @@ nperiod = 6 #number of periods (two per cycle)
 nobv = 5 #number of observations per patient
 
 designs = c("FRN","AGGBAN","INDBAN", "BBAN")
-for (i in 1:4){
+
+for (i in 4:4){
+  #cat("Start", i, timestamp())
   if (i==1){
     out <- FRN_run(J, nperiod, nobv, b, trup)} #Fixed randomization design
   if (i==2){ 
@@ -43,6 +49,7 @@ for (i in 1:4){
   t = out[6] #treatment allocations 
   y = out[7] #observed outcomes
   save(out, file=paste("Example2_",designs[i],".RData",sep=""))
+  #cat("Finish", i, timestamp())
 }
 
 

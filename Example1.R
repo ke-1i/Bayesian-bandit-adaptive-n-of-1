@@ -45,7 +45,6 @@ for (i in 1:4){
   t = out[6] #treatment allocations 
   y = out[7] #observed outcomes
   save(out, file=paste("Example1_",designs[i],".RData",sep=""))
-  #cat(timestamp())
 }
 
 
